@@ -23,6 +23,8 @@ int main(int argc, char** argv)
   int i;
   unsigned int inf, sup, num, j;
 
+  int range, rand_num;
+
   srand(time(NULL));
 
   if (argc != 7) {
@@ -35,8 +37,8 @@ int main(int argc, char** argv)
     exit(-1);
   }
   printf("Practice no 1, Section 1\n");
-  printf("Done by: Your names\n");
-  printf("Grupo: Your group\n");
+  printf("Done by: Jimena Gesto Jiménez y Jaime Córdoba\n");
+  printf("Grupo: 1262\n");
 
   /* check command line */
   for(i = 1; i < argc; i++) {
@@ -51,9 +53,28 @@ int main(int argc, char** argv)
     }
   }
 
-  /* print data */
-  for(j = 0; j < num; j++) { 
-    printf("%d\n", random_num(inf, sup));
+  range = sup - inf + 1;
+  int frequencies[range];
+
+  for(i=0 ; i<range ; i++){ 
+    frequencies[i] = 0 ;
+  }
+
+  for(j=0 ; j < num ; j++){
+    rand_num = random_num(inf,sup);
+    if(rand_num != -1){
+      frequencies[rand_num - inf]++;
+    }
+  }
+
+  printf("Histograma de números generados:\n");
+
+  for(i=0 ; i<range; i++){
+    printf("%d: ", inf + i);
+    for(j=0; j<frequencies[i];j++){
+      printf("*");
+    }
+    printf("(%d)\n", frequencies[i]);
   }
 
   return 0;
